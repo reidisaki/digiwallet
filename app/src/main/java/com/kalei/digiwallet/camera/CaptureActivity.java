@@ -17,6 +17,7 @@ package com.kalei.digiwallet.camera;
  * limitations under the License.
  */
 
+import com.crashlytics.android.Crashlytics;
 import com.googlecode.tesseract.android.TessBaseAPI;
 import com.kalei.digiwallet.R;
 import com.kalei.digiwallet.camera.ShutterButton.OnShutterButtonListener;
@@ -82,6 +83,8 @@ import java.net.URL;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * This activity opens the camera and does the actual scanning on a background thread. It draws a viewfinder to help the user place the text correctly, shows
@@ -269,7 +272,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        Fabric.with(this, new Crashlytics());
         checkFirstLaunch();
 
         if (isFirstLaunch) {
